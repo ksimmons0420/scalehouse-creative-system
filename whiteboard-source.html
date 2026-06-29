@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scale House — Creative System Whiteboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Caveat:wght@600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :root{
+    --ink:#1a1a1a; --paper:#f6f5f1; --line:#d9d7cf;
+    --purple:#8516ff; --magenta:#ed06de; --yellow:#ffd600; --cyan:#16b9ff; --green:#16c47a; --muted:#6b6a64;
+  }
+  body{ font-family:'Archivo',-apple-system,sans-serif; color:var(--ink);
+    background:var(--paper);
+    background-image:radial-gradient(var(--line) 1px, transparent 1px);
+    background-size:26px 26px; }
+  .board{ width:1240px; margin:0 auto; padding:54px 60px 46px; position:relative; }
+  .marker{ font-family:'Caveat',cursive; }
+  /* header */
+  .kicker{ font-weight:800; letter-spacing:.16em; text-transform:uppercase; font-size:14px; color:var(--purple); }
+  h1{ font-family:'Caveat',cursive; font-size:74px; line-height:.95; margin:2px 0 6px; color:var(--ink); }
+  h1 .hl{ color:var(--magenta); }
+  .sub{ font-size:18px; color:var(--muted); max-width:840px; }
+  .tape{ position:absolute; top:30px; right:60px; background:var(--yellow); transform:rotate(4deg);
+    font-weight:900; font-size:13px; letter-spacing:.05em; padding:8px 14px; box-shadow:3px 4px 0 rgba(0,0,0,.12); }
+  /* flow arrows */
+  .arrow{ text-align:center; font-family:'Caveat',cursive; color:var(--purple); font-size:30px; font-weight:700; margin:6px 0; }
+  .arrow span{ font-size:15px; color:var(--muted); font-family:'Archivo'; }
+  /* act blocks */
+  .act{ background:#fff; border:2.5px solid var(--ink); border-radius:18px; padding:24px 26px; position:relative;
+    box-shadow:6px 7px 0 rgba(0,0,0,.10); margin-top:14px; }
+  .act .badge{ position:absolute; top:-16px; left:24px; background:var(--ink); color:#fff; font-weight:900;
+    font-size:13px; letter-spacing:.08em; padding:6px 14px; border-radius:20px; }
+  .act h2{ font-size:24px; font-weight:900; margin-bottom:2px; }
+  .act h2 .marker{ font-size:30px; color:var(--purple); }
+  .act .lead{ color:var(--muted); font-size:15px; margin-bottom:16px; }
+  /* problem note */
+  .note{ background:var(--yellow); border-radius:6px; padding:14px 18px; font-weight:700; font-size:17px;
+    transform:rotate(-1deg); box-shadow:3px 4px 0 rgba(0,0,0,.12); display:inline-block; }
+  /* 6 questions */
+  .q{ display:grid; grid-template-columns:1fr 1fr; gap:8px 18px; margin-bottom:18px; }
+  .q div{ font-size:13.5px; padding:7px 0; border-bottom:1px dashed var(--line); }
+  .q b{ color:var(--purple); }
+  .q .n{ display:inline-block; width:20px; height:20px; background:var(--purple); color:#fff; border-radius:50%;
+    font-size:11px; font-weight:800; text-align:center; line-height:20px; margin-right:7px; }
+  /* scorecard */
+  .scoretitle{ font-weight:800; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .card{ border:2px solid var(--ink); border-radius:12px; padding:14px 12px; text-align:center; background:#fff; }
+  .card .pts{ font-weight:900; font-size:26px; }
+  .card.p .pts{color:var(--purple)} .card.m .pts{color:var(--magenta)} .card.c .pts{color:var(--cyan)} .card.y .pts{color:#caa400}
+  .card .lab{ font-weight:800; font-size:12px; letter-spacing:.03em; text-transform:uppercase; margin-top:4px; }
+  .card .pts small{ font-size:13px; color:var(--muted); font-weight:700; }
+  .bands{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+  .band{ border-radius:10px; padding:10px 12px; text-align:center; font-size:13px; font-weight:700; }
+  .band b{ display:block; font-size:16px; font-weight:900; }
+  .b1{ background:#fde2e2; color:#b3261e } .b2{ background:#fff3cf; color:#8a6d00 } .b3{ background:#dff5ec; color:#0f7a4d }
+  .insight{ margin-top:14px; background:#f1ebff; border-left:5px solid var(--purple); border-radius:8px; padding:12px 16px; font-size:14px; }
+  .insight b{ color:var(--purple); }
+  /* iteration ladder */
+  .ladder{ display:flex; align-items:flex-end; gap:10px; margin:6px 0 4px; }
+  .step{ flex:1; background:#fff; border:2px solid var(--ink); border-radius:10px 10px 4px 4px; padding:12px 10px; text-align:center; }
+  .step .sn{ font-weight:900; color:var(--magenta); font-size:14px; }
+  .step .st{ font-weight:800; font-size:13px; margin-top:3px; }
+  .step .sd{ font-size:11px; color:var(--muted); margin-top:3px; line-height:1.25; }
+  .step.s1{height:118px} .step.s2{height:134px} .step.s3{height:150px} .step.s4{height:166px} .step.s5{height:184px}
+  .smallbig{ display:flex; justify-content:space-between; font-family:'Caveat',cursive; font-size:22px; color:var(--purple); margin-top:2px; }
+  .mech{ margin-top:14px; background:#1a1a1a; color:#fff; border-radius:12px; padding:14px 18px; }
+  .mech b{ color:var(--yellow); }
+  .formats{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .fmt{ border:2px solid var(--ink); border-radius:20px; padding:7px 14px; font-weight:800; font-size:13px; background:#fff; }
+  .fmt small{ display:block; font-weight:600; font-size:10.5px; color:var(--muted); }
+  .fmt-lead{ font-weight:800; font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin-top:18px; }
+  /* selling points */
+  .sell{ margin-top:22px; background:linear-gradient(100deg,#8516ff,#ed06de); color:#fff; border-radius:18px; padding:26px 28px; box-shadow:6px 7px 0 rgba(0,0,0,.14); }
+  .sell .marker{ font-size:34px; color:var(--yellow); }
+  .sell h3{ font-size:15px; letter-spacing:.1em; text-transform:uppercase; font-weight:900; opacity:.9; }
+  .sp{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px 26px; margin-top:14px; }
+  .sp div{ font-size:15px; } .sp b{ display:block; font-size:17px; font-weight:900; margin-bottom:2px; }
+  .sp .icon{ color:var(--yellow); font-weight:900; }
+  .foot{ display:flex; justify-content:space-between; margin-top:20px; font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+<div class="board">
+  <div class="tape">SLIDES 05 + 06 · MADE VISUAL</div>
+  <div class="kicker">Scale House · The Creative System</div>
+  <h1>One winner → <span class="hl">ten winners.</span></h1>
+  <p class="sub">Most agencies find a winning ad and ride it until it dies. We do two things they don't: we <b>diagnose exactly why it won</b>, then <b>systematically multiply it</b> before it burns out. Here's the system on a whiteboard.</p>
+
+  <div class="act">
+    <div class="badge">THE PROBLEM</div>
+    <div style="margin-top:6px"><span class="note">A winner with no diagnosis = a coin flip. When it dies, you can't rebuild it — and the account collapses with it.</span></div>
+  </div>
+
+  <div class="arrow">↓ &nbsp;<span>so first, we diagnose</span></div>
+
+  <div class="act">
+    <div class="badge" style="background:var(--purple)">ACT 1 · DIAGNOSE</div>
+    <h2><span class="marker">We don't guess why it worked.</span> We score it.</h2>
+    <div class="lead">A 6-question pass on every winner (Schwartz awareness + Bencivenga's 4-component score). Honest math, not vibes.</div>
+    <div class="q">
+      <div><span class="n">1</span><b>Angle name</b> — 3–5 words, e.g. "It's parasites, not fats"</div>
+      <div><span class="n">2</span><b>Awareness level</b> — where the reader enters → exits</div>
+      <div><span class="n">3</span><b>Belief shift</b> — old belief out, new belief in</div>
+      <div><span class="n">4</span><b>The "I want"</b> — the one core desire, in their words</div>
+      <div><span class="n">5</span><b>Identification</b> — the self-image they step into</div>
+      <div><span class="n">6</span><b>Bencivenga score</b> — /100, the 4 components below</div>
+    </div>
+    <div class="scoretitle">The 4-component scorecard — 25 pts each</div>
+    <div class="cards">
+      <div class="card p"><div class="pts">25<small>/25</small></div><div class="lab">Urgent Problem</div></div>
+      <div class="card m"><div class="pts">25<small>/25</small></div><div class="lab">Unique Solution</div></div>
+      <div class="card c"><div class="pts">25<small>/25</small></div><div class="lab">Unquestionable Proof</div></div>
+      <div class="card y"><div class="pts">25<small>/25</small></div><div class="lab">Irresistible Offer</div></div>
+    </div>
+    <div class="bands">
+      <div class="band b1"><b>&lt; 60</b>Broken — fix before scaling</div>
+      <div class="band b2"><b>60–80</b>Fixable — patch weakest first</div>
+      <div class="band b3"><b>80+</b>Potential control</div>
+    </div>
+    <div class="insight"><b>The score IS the iteration brief.</b> A winner can score low — that just tells us exactly what to add next. Proof at 5/25 → next test adds testimonials. Offer at 0/25 → next test adds a guarantee. Every test is briefed by data.</div>
+  </div>
+
+  <div class="arrow">↓ &nbsp;<span>now we know WHY — so we multiply</span></div>
+
+  <div class="act">
+    <div class="badge" style="background:var(--magenta)">ACT 2 · MULTIPLY</div>
+    <h2><span class="marker">Then we multiply it</span> before it dies.</h2>
+    <div class="lead">Five iteration types, ordered small → big. Small ones ship faster and stack more shots per concept.</div>
+    <div class="ladder">
+      <div class="step s1"><div class="sn">1</div><div class="st">Hook</div><div class="sd">headline only · 38 levers</div></div>
+      <div class="step s2"><div class="sn">2</div><div class="st">Open-visual</div><div class="sd">first frame · new demo, same targeting</div></div>
+      <div class="step s3"><div class="sn">3</div><div class="st">Veilance</div><div class="sd">same msg · fear ↔ hope</div></div>
+      <div class="step s4"><div class="sn">4</div><div class="st">CTA</div><div class="sd">urgency / scarcity / close</div></div>
+      <div class="step s5"><div class="sn">5</div><div class="st">New angle</div><div class="sd">belief swap · biggest single swing</div></div>
+    </div>
+    <div class="smallbig"><span>← cheap &amp; fast</span><span>big swing →</span></div>
+    <div class="mech"><b>Bigger swing — the mechanism swap.</b> Same script, a NET-NEW mechanism (not the same one reworded). The mechanism is as important as the hook — and it's where breakout winners come from.</div>
+    <div class="fmt-lead">Format swaps — same script, 6 surfaces (cheapest next test)</div>
+    <div class="formats">
+      <div class="fmt">AI UGC<small>Sora / Veo + AI voice</small></div>
+      <div class="fmt">AI Podcast<small>two AI hosts</small></div>
+      <div class="fmt">Static<small>headline + image</small></div>
+      <div class="fmt">Long-form<small>~2K words + img</small></div>
+      <div class="fmt">Real UGC<small>hire a creator</small></div>
+      <div class="fmt">Voiceover<small>11Labs + text</small></div>
+    </div>
+  </div>
+
+  <div class="sell">
+    <div class="marker">Why this wins for you ↴</div>
+    <h3>What Scale House does that others don't</h3>
+    <div class="sp">
+      <div><span class="icon">✓</span> <b>Predictable, not luck</b> A repeatable scorecard means winners are diagnosed and rebuilt on purpose — not stumbled into.</div>
+      <div><span class="icon">✓</span> <b>More winners per concept</b> One winning ad becomes a portfolio of 10+ variations instead of dying as a one-off.</div>
+      <div><span class="icon">✓</span> <b>Built to outlast fatigue</b> We multiply a winner before it burns out — so performance compounds instead of collapsing.</div>
+      <div><span class="icon">✓</span> <b>Every test is briefed by data</b> The score tells us what to fix next, so spend goes to the highest-leverage change every time.</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>SCALE HOUSE · CREATIVE LAB</span><span>Diagnose → Multiply · the system behind the work</span></div>
+</div>
+</body>
+</html>
