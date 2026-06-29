@@ -11,3 +11,7 @@ it before it dies.**
 ## Worked example (the process in action)
 - `scalehouse-process-worked-example.png` — one real winner (Resilia gut/parasite ad) run through the full loop: Winner → Diagnose (scored, leaks found) → Multiply (the actual variations) → Result. Shows how the score drives the iterations.
 - `process-example-source.html` — editable source.
+
+## Infographic (v3 — visual, minimal text)
+- `scalehouse-creative-system-infographic.png` — icon-driven 5-step flow: Find winner → Diagnose → Multiply → Portfolio → Compounds. Phosphor icons + mini-visuals (score bars, branch, grid, chart), barely any words.
+- `infographic-source/` — editable HTML + icons.

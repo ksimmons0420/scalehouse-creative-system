@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scale House — Creative System Infographic</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Caveat:wght@700&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  :root{--ink:#15141a;--bg:#14121c;--card:#1e1b29;--purple:#8516ff;--magenta:#ed06de;--yellow:#ffd600;--cyan:#16b9ff;--green:#19c98a;--red:#ff5a6a;--muted:#9a96ac}
+  body{font-family:'Archivo',-apple-system,sans-serif;background:
+    radial-gradient(1200px 700px at 50% -8%, #2a2140 0%, transparent 60%), var(--bg);
+    color:#fff}
+  .wrap{width:1000px;margin:0 auto;padding:54px 64px 50px}
+  .marker{font-family:'Caveat',cursive}
+  .kick{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:13px;color:var(--magenta);text-align:center}
+  h1{text-align:center;font-size:46px;font-weight:900;line-height:1.04;margin:8px 0 4px}
+  h1 .hl{color:var(--yellow)}
+  .tag{text-align:center;color:var(--muted);font-size:16px;font-weight:600;margin-bottom:30px}
+  /* hero stat */
+  .hero{display:flex;align-items:center;justify-content:center;gap:18px;margin:0 auto 34px;
+    background:linear-gradient(100deg,var(--purple),var(--magenta));border-radius:20px;padding:18px 30px;width:max-content}
+  .hero .big{font-family:'Caveat',cursive;font-size:60px;line-height:.85;color:#fff}
+  .hero .lbl{font-weight:800;font-size:15px;letter-spacing:.02em}
+  .hero .lbl small{display:block;color:#ffe9fb;font-weight:600;font-size:13px}
+  /* steps */
+  .step{display:grid;grid-template-columns:96px 1fr 250px;align-items:center;gap:22px;
+    background:var(--card);border:1px solid #2e2a3d;border-radius:20px;padding:20px 24px;position:relative;margin-bottom:14px}
+  .circle{width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+  .circle img{width:46px;height:46px}
+  .c1{background:linear-gradient(135deg,#ffd600,#ffae00)} .c2{background:linear-gradient(135deg,#9b3bff,#8516ff)}
+  .c3{background:linear-gradient(135deg,#ff3df0,#ed06de)} .c4{background:linear-gradient(135deg,#3fc6ff,#16b9ff)}
+  .c5{background:linear-gradient(135deg,#1ee0a0,#12b87c)}
+  .num{position:absolute;top:-8px;left:-8px;width:28px;height:28px;border-radius:50%;background:#fff;color:var(--ink);
+    font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+  .txt .h{font-size:25px;font-weight:900;line-height:1}
+  .txt .s{color:var(--muted);font-size:15px;font-weight:600;margin-top:4px}
+  /* mini visuals */
+  .viz{height:84px;display:flex;align-items:center;justify-content:center}
+  /* winner card */
+  .adwin{width:120px;height:66px;border-radius:8px;background:#26223a;border:2px solid var(--yellow);position:relative;display:flex;align-items:center;justify-content:center}
+  .adwin .star{font-size:24px}
+  .adwin .glow{position:absolute;inset:-4px;border-radius:10px;box-shadow:0 0 22px 2px rgba(255,214,0,.5)}
+  /* score bars */
+  .bars{display:flex;align-items:flex-end;gap:10px;height:70px}
+  .bars .b{width:22px;border-radius:5px 5px 0 0}
+  .bars .ok{background:var(--green)} .bars .lk{background:var(--red)}
+  .scoretag{margin-left:12px;font-family:'Caveat',cursive;font-size:30px;color:#fff;align-self:center}
+  .scoretag small{display:block;font-family:'Archivo';font-size:10px;color:var(--red);font-weight:800;letter-spacing:.04em}
+  /* branch */
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .grid span{width:22px;height:16px;border-radius:3px;background:#3a3550}
+  .grid span.on{background:var(--cyan)}
+  /* chart */
+  .chart{display:flex;align-items:flex-end;gap:8px;height:70px}
+  .chart .cb{width:18px;border-radius:4px 4px 0 0;background:linear-gradient(var(--green),#0c8f5e)}
+  .connector{width:3px;height:16px;background:#2e2a3d;margin:0 auto -8px auto;border-radius:2px}
+  .foot{margin-top:24px;text-align:center;background:#1e1b29;border:1px solid #2e2a3d;border-radius:16px;padding:18px}
+  .foot .big{font-weight:900;font-size:20px}
+  .foot .big .y{color:var(--yellow)}
+  .foot .sm{color:var(--muted);font-size:14px;font-weight:600;margin-top:3px}
+  .brand{margin-top:18px;text-align:center;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.12em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kick">Scale House · The Creative System</div>
+  <h1>How one ad becomes <span class="hl">ten.</span></h1>
+  <div class="tag">Find it · diagnose it · multiply it — before it dies.</div>
+
+  <div class="hero">
+    <div class="big">1&nbsp;→&nbsp;10+</div>
+    <div class="lbl">winners from one<br><small>not luck — a system</small></div>
+  </div>
+
+  <div class="step">
+    <div class="circle c1"><span class="num">1</span><img src="icons/trophy-w.svg"></div>
+    <div class="txt"><div class="h">Find the winner</div><div class="s">One ad breaks out.</div></div>
+    <div class="viz"><div class="adwin"><div class="glow"></div><span class="star">🏆</span></div></div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step">
+    <div class="circle c2"><span class="num">2</span><img src="icons/magnifying-glass-w.svg"></div>
+    <div class="txt"><div class="h">Diagnose it</div><div class="s">Score <i>why</i> it won — spot the leaks.</div></div>
+    <div class="viz">
+      <div class="bars"><div class="b ok" style="height:64px"></div><div class="b ok" style="height:60px"></div><div class="b lk" style="height:22px"></div><div class="b lk" style="height:26px"></div></div>
+      <div class="scoretag">63<small>2 leaks</small></div>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step">
+    <div class="circle c3"><span class="num">3</span><img src="icons/tree-structure-w.svg"></div>
+    <div class="txt"><div class="h">Multiply it</div><div class="s">The fixes become new tests.</div></div>
+    <div class="viz">
+      <svg width="200" height="80" viewBox="0 0 200 80">
+        <g stroke="#5a5470" stroke-width="2.5" fill="none">
+          <path d="M30,40 C70,40 70,14 110,14"/><path d="M30,40 C70,40 70,27 110,27"/>
+          <path d="M30,40 H110"/><path d="M30,40 C70,40 70,53 110,53"/><path d="M30,40 C70,40 70,66 110,66"/>
+        </g>
+        <circle cx="26" cy="40" r="11" fill="#ed06de"/>
+        <circle cx="116" cy="14" r="7" fill="#fff"/><circle cx="116" cy="27" r="7" fill="#fff"/>
+        <circle cx="116" cy="40" r="7" fill="#fff"/><circle cx="116" cy="53" r="7" fill="#fff"/><circle cx="116" cy="66" r="7" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step">
+    <div class="circle c4"><span class="num">4</span><img src="icons/squares-four-w.svg"></div>
+    <div class="txt"><div class="h">Build the portfolio</div><div class="s">A wall of variations, not one fragile ad.</div></div>
+    <div class="viz"><div class="grid">
+      <span class="on"></span><span></span><span class="on"></span><span></span>
+      <span></span><span class="on"></span><span></span><span class="on"></span>
+      <span class="on"></span><span></span><span class="on"></span><span></span>
+    </div></div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step">
+    <div class="circle c5"><span class="num">5</span><img src="icons/trend-up-w.svg"></div>
+    <div class="txt"><div class="h">Compound the wins</div><div class="s">Performance climbs instead of dying.</div></div>
+    <div class="viz"><div class="chart">
+      <div class="cb" style="height:20px"></div><div class="cb" style="height:32px"></div><div class="cb" style="height:44px"></div><div class="cb" style="height:56px"></div><div class="cb" style="height:70px"></div>
+    </div></div>
+  </div>
+
+  <div class="foot">
+    <div class="big">One winner → a <span class="y">briefed test portfolio</span>.</div>
+    <div class="sm">The score tells us what to fix. We multiply before fatigue. That's the Scale House edge.</div>
+  </div>
+  <div class="brand">SCALE HOUSE · CREATIVE LAB</div>
+</div>
+</body>
+</html>
