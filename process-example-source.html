@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scale House — The Process, Worked Example</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  :root{--ink:#16151a;--paper:#f6f5f1;--line:#dad8d0;--purple:#8516ff;--magenta:#ed06de;--yellow:#ffd600;--cyan:#16b9ff;--green:#16c47a;--red:#e23b3b;--muted:#6b6a64}
+  body{font-family:'Archivo',-apple-system,sans-serif;color:var(--ink);background:var(--paper);
+    background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:26px 26px}
+  .board{width:1320px;margin:0 auto;padding:48px 56px 44px}
+  .marker{font-family:'Caveat',cursive}
+  .kicker{font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:13px;color:var(--purple)}
+  h1{font-family:'Caveat',cursive;font-size:66px;line-height:.95;margin:2px 0 6px}
+  h1 .hl{color:var(--magenta)}
+  .sub{font-size:17px;color:var(--muted);max-width:900px}
+  .tape{position:absolute;top:30px;right:56px;background:var(--yellow);transform:rotate(3deg);font-weight:900;font-size:12px;letter-spacing:.05em;padding:8px 14px;box-shadow:3px 4px 0 rgba(0,0,0,.12)}
+  .step{margin-top:26px;position:relative}
+  .steplab{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .stepn{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center}
+  .steplab h2{font-size:22px;font-weight:900}
+  .steplab .m{font-family:'Caveat',cursive;font-size:27px;color:var(--purple);font-weight:700}
+  .flowarrow{font-family:'Caveat',cursive;color:var(--magenta);font-size:30px;text-align:center;margin:4px 0}
+  /* ad card */
+  .adcard{background:#fff;border:2.5px solid var(--ink);border-radius:14px;overflow:hidden;box-shadow:5px 6px 0 rgba(0,0,0,.10);max-width:560px}
+  .adcard .bar{background:var(--ink);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;padding:7px 14px;display:flex;justify-content:space-between}
+  .adcard .vis{height:120px;background:linear-gradient(120deg,#2a2540,#3a1d5e);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:22px;opacity:.96}
+  .adcard .body{padding:14px 16px}
+  .adcard .hook{font-weight:900;font-size:18px;line-height:1.2}
+  .adcard .copy{font-size:13px;color:#333;margin-top:6px;line-height:1.4}
+  .adcard .cta{margin-top:10px;display:inline-block;background:var(--magenta);color:#fff;font-weight:800;font-size:12px;padding:6px 14px;border-radius:6px}
+  .winnerwrap{display:flex;gap:22px;align-items:center}
+  .wtag{background:#dff5ec;border:2px solid var(--green);border-radius:10px;padding:12px 16px;font-size:14px;max-width:380px}
+  .wtag b{color:#0f7a4d}
+  /* diagnose */
+  .diag{display:flex;gap:20px;align-items:flex-start}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;flex:0 0 560px}
+  .sc{border:2px solid var(--ink);border-radius:10px;padding:10px 14px;background:#fff;display:flex;justify-content:space-between;align-items:center}
+  .sc.leak{border-color:var(--red);background:#fdeaea}
+  .sc .lab{font-weight:800;font-size:13px}
+  .sc .lab small{display:block;font-weight:600;color:var(--muted);font-size:11px}
+  .sc .pt{font-weight:900;font-size:22px}
+  .sc.ok .pt{color:var(--green)} .sc.leak .pt{color:var(--red)}
+  .diagright{flex:1}
+  .total{font-size:15px;font-weight:800;margin-bottom:8px}
+  .total .big{font-family:'Caveat',cursive;font-size:40px;color:var(--ink);vertical-align:-6px}
+  .bandpill{display:inline-block;background:#fff3cf;color:#8a6d00;font-weight:900;border-radius:20px;padding:6px 14px;font-size:13px;margin-left:8px}
+  .brief{background:#1a1a1a;color:#fff;border-radius:12px;padding:14px 16px;font-size:14px;margin-top:6px}
+  .brief b{color:var(--yellow)}
+  /* multiply grid */
+  .vargrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .var{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:12px 14px;position:relative}
+  .var .t{font-weight:900;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--purple);margin-bottom:5px}
+  .var .h{font-weight:800;font-size:14.5px;line-height:1.25}
+  .var .d{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.3}
+  .var .fix{position:absolute;top:-10px;right:10px;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px}
+  .var.mech{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+  .var.mech .t{color:var(--yellow)} .var.mech .d{color:#c9c7d6}
+  .fmtlead{font-weight:800;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+  .fmts{display:flex;flex-wrap:wrap;gap:8px}
+  .fmt{border:2px solid var(--ink);border-radius:18px;padding:6px 13px;font-weight:800;font-size:12px;background:#fff}
+  /* result */
+  .result{margin-top:24px;background:linear-gradient(100deg,#8516ff,#ed06de);color:#fff;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px;box-shadow:5px 6px 0 rgba(0,0,0,.14)}
+  .result .num{font-family:'Caveat',cursive;font-size:64px;line-height:.9;color:var(--yellow)}
+  .result .txt b{font-size:20px;font-weight:900;display:block}
+  .result .txt{font-size:15px}
+  .foot{display:flex;justify-content:space-between;margin-top:18px;font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="board">
+  <div class="tape">WORKED EXAMPLE · THE PROCESS</div>
+  <div class="kicker">Scale House · Creative System in action</div>
+  <h1>One real winner, <span class="hl">multiplied.</span></h1>
+  <p class="sub">Not the theory — the process running on an actual ad. A winner comes in, we score it, the score tells us its weak spots, and we spin out a tested portfolio of variations that fix them. Here's the whole loop on one ad.</p>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="steplab"><div class="stepn">1</div><h2>The winner</h2><span class="m">— it's working, but why?</span></div>
+    <div class="winnerwrap">
+      <div class="adcard">
+        <div class="bar"><span>RESILIA · GUT / PARASITE CLEANSE</span><span>ANGLE: "It's parasites, not fats"</span></div>
+        <div class="vis">before → after · "this is her now"</div>
+        <div class="body">
+          <div class="hook">"Your belly isn't the problem — your gut is."</div>
+          <div class="copy">Bloated after every meal, exhausted by 2pm, joints aching? They've been multiplying inside you for years. Two oils — oregano (carvacrol) breaks the biofilm, black seed (thymoquinone) flushes it out.</div>
+          <span class="cta">Take care of your gut →</span>
+        </div>
+      </div>
+      <div class="wtag"><b>Scaled and converting.</b> Strong hook, real mechanism. If we just ride it, it dies and we can't rebuild it. So first — diagnose <i>why</i>.</div>
+    </div>
+  </div>
+
+  <div class="flowarrow">↓ &nbsp; run the 6-question + 4-component pass</div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="steplab"><div class="stepn">2</div><h2>Diagnose</h2><span class="m">— score it, find the leaks</span></div>
+    <div class="diag">
+      <div class="cards">
+        <div class="sc ok"><div class="lab">Urgent Problem<small>belly/bloat/fatigue — actively searched</small></div><div class="pt">23</div></div>
+        <div class="sc ok"><div class="lab">Unique Solution<small>named mechanism: biofilm + flush</small></div><div class="pt">22</div></div>
+        <div class="sc leak"><div class="lab">Unquestionable Proof<small>"20 yrs of clients" — anecdotal only</small></div><div class="pt">8</div></div>
+        <div class="sc leak"><div class="lab">Irresistible Offer<small>scarcity, but no guarantee / risk reversal</small></div><div class="pt">10</div></div>
+      </div>
+      <div class="diagright">
+        <div class="total"><span class="big">63</span>/100 <span class="bandpill">FIXABLE — patch weakest first</span></div>
+        <div class="brief"><b>The score IS the brief.</b> Problem + mechanism are carrying it. The leaks are <b>Proof (8/25)</b> and <b>Offer (10/25)</b> — so the next tests add real proof and a risk-reversal. We're not guessing what to try; the diagnosis tells us.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flowarrow">↓ &nbsp; multiply it — small swings first, briefed by the score</div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="steplab"><div class="stepn">3</div><h2>Multiply</h2><span class="m">— one ad becomes a test portfolio</span></div>
+    <div class="vargrid">
+      <div class="var"><div class="t">1 · Hook (qualifying)</div><div class="h">"Women over 40 with belly fat that won't budge — this is for you."</div><div class="d">Same ad, sharper headline. Cheapest, fastest test.</div></div>
+      <div class="var"><div class="t">1 · Hook (question)</div><div class="h">"Why do mornings feel so much harder after 40?"</div><div class="d">Second hook lever off the same body.</div></div>
+      <div class="var"><div class="t">2 · Open-visual swap</div><div class="h">Woman, 40s → Man, 50s in his garage</div><div class="d">New demographic, same targeting — no rebuild.</div></div>
+      <div class="var"><div class="t">3 · Veilance twin</div><div class="h">"Quietly draining the life out of you" → "feel like yourself again by next week"</div><div class="d">Same message, fear → hope.</div></div>
+      <div class="var"><div class="fix">↳ patches Offer leak</div><div class="t">4 · CTA + risk reversal</div><div class="h">"60-day money-back. If your bloat isn't gone, you pay nothing."</div><div class="d">Directly fixes the 10/25 offer score.</div></div>
+      <div class="var"><div class="fix">↳ patches Proof leak</div><div class="t">5 · New angle (belief swap)</div><div class="h">"Tiredness isn't age — it's parasites." + before/after + lab test</div><div class="d">Same template, new belief, real proof added.</div></div>
+      <div class="var mech"><div class="t">⚡ Bigger swing · Mechanism swap</div><div class="h">"It's not parasites — it's a damaged gut lining."</div><div class="d">NET-NEW mechanism, same script. Where breakout winners come from.</div></div>
+      <div class="var" style="grid-column:span 2;display:flex;align-items:center"><div><div class="t" style="color:var(--ink)">Plus — same script, 6 surfaces</div><div class="d" style="margin-top:2px">The cheapest next test is just a new format.</div></div></div>
+    </div>
+    <div class="fmtlead">Format swaps</div>
+    <div class="fmts">
+      <div class="fmt">AI UGC</div><div class="fmt">AI Podcast</div><div class="fmt">Static</div><div class="fmt">Long-form native</div><div class="fmt">Real UGC</div><div class="fmt">Voiceover</div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="result">
+    <div class="num">1→10+</div>
+    <div class="txt"><b>One winner → a briefed test portfolio.</b>From a single working ad we ship 7 concept iterations + 6 format swaps — and the score told us exactly which to lead with (proof + offer). Winners get multiplied before they die, so performance compounds instead of collapsing.</div>
+  </div>
+
+  <div class="foot"><span>SCALE HOUSE · CREATIVE LAB</span><span>Worked example · Diagnose → Multiply</span></div>
+</div>
+</body>
+</html>
